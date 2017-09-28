@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'rowr/command_line'
+
+result = Rowr::CommandLine.start( ARGV )
+
+exit 1 unless result # non-zero exit status on process telling us there's problems.
