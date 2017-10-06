@@ -87,7 +87,10 @@ module Rowr
       @state.src = @option_getter.source_directory
       if @state.config_file_exists?
         @prompt.say("I've found a rowr save file.")
-        if @prompt.select('Would you like to continue or reset?', %w(Continue Reset)) == 'Continue'
+        continue_resp = @prompt.select('Would you like to continue or reset?', %w(Continue Reset))
+        if continue_resp == 'Reset'
+          reset
+        else
           continue
         end
       end
