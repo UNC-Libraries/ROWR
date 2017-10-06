@@ -9,13 +9,13 @@ any broken links.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+After installing ruby, add `gem 'rowr'` to your application's Gemfile or run the following from the command line:
 
     $ gem install rowr
 
 ## Usage
 
-`rowr start`: Start the script, will prompt you for information about the really old site.
+`rowr start` Start the script, will prompt you for information about the really old site.
 While running, you can always prematurely stop the script with CMD+C or CTRL+C.
 
 `rowr continue` Continue where you left off.
