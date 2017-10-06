@@ -198,10 +198,26 @@ describe Rowr::LinkProcessor do
     expect(@processor.process_link).to eq('/base/subdir/file.htm')
   end
 
+  it 'processes an existing directory targeted by an absolute link' do
+    @processor.containing_file = File.expand_path(File.join(test_site, 'file.htm'))
+    @processor.link_to_check = '/subdir'
+    expect(@processor.process_link).to eq('/base/subdir')
+    @processor.link_to_check = '/subdir/'
+    expect(@processor.process_link).to eq('/base/subdir/')
+  end
+
   it 'processes an existing file targeted by a relative link' do
     @processor.containing_file = File.expand_path(File.join(test_site, 'file.htm'))
     @processor.link_to_check = 'subdir/file.htm'
     expect(@processor.process_link).to eq('/base/subdir/file.htm')
+  end
+
+  it 'processes an existing directory targeted by an relative link' do
+    @processor.containing_file = File.expand_path(File.join(test_site, 'file.htm'))
+    @processor.link_to_check = 'subdir'
+    expect(@processor.process_link).to eq('/base/subdir')
+    @processor.link_to_check = 'subdir/'
+    expect(@processor.process_link).to eq('/base/subdir/')
   end
 
   it 'processes an existing file targeted by a nested relative link' do
@@ -210,15 +226,39 @@ describe Rowr::LinkProcessor do
     expect(@processor.process_link).to eq('/base/subdir/style.css')
   end
 
+  it 'processes an existing directory targeted by a nested relative link' do
+    @processor.containing_file = File.expand_path(File.join(test_site, 'subdir/file.htm'))
+    @processor.link_to_check = 'subdir2'
+    expect(@processor.process_link).to eq('/base/subdir/subdir2')
+    @processor.link_to_check = 'subdir2/'
+    expect(@processor.process_link).to eq('/base/subdir/subdir2/')
+  end
+
   it 'processes an existing file targeted by a uri' do
     @processor.containing_file = File.expand_path(File.join(test_site, 'subdir/file.htm'))
     @processor.link_to_check = 'https://www.google.com/subdir/style.css'
     expect(@processor.process_link).to eq('/base/subdir/style.css')
   end
 
+  it 'processes an existing directory targeted by a uri' do
+    @processor.containing_file = File.expand_path(File.join(test_site, 'file.htm'))
+    @processor.link_to_check = 'https://www.google.com/subdir'
+    expect(@processor.process_link).to eq('/base/subdir')
+    @processor.link_to_check = 'https://www.google.com/subdir/'
+    expect(@processor.process_link).to eq('/base/subdir/')
+  end
+
   it 'returns nil if the file does not exist' do
     @processor.containing_file = File.expand_path(File.join(test_site, 'file.htm'))
     @processor.link_to_check = 'image2.png'
+    expect(@processor.process_link).to eq(nil)
+  end
+
+  it 'returns nil if the directory does not exist' do
+    @processor.containing_file = File.expand_path(File.join(test_site, 'file.htm'))
+    @processor.link_to_check = 'badsubdir'
+    expect(@processor.process_link).to eq(nil)
+    @processor.link_to_check = 'badsubdir/'
     expect(@processor.process_link).to eq(nil)
   end
 
