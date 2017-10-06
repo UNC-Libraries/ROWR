@@ -1,6 +1,6 @@
 # ROWR: Really Old Website Resurrector
 
-[![Build Status](https://travis-ci.org/UNC-Libraries/ROWR.svg?branch=master)](https://travis-ci.org/UNC-Libraries/ROWR)
+[![Build Status](https://travis-ci.org/UNC-Libraries/ROWR.svg?branch=master)](https://travis-ci.org/UNC-Libraries/ROWR) [![Gem Version](https://badge.fury.io/rb/rowr.svg)](https://badge.fury.io/rb/rowr)
 
 It's basically link find/replace tool for a really old websites. ROWR will parse through your site files and look for any
 broken links. When it finds one, it will prompt you to either replace, remove, 
